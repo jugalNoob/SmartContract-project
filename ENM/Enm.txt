@@ -1,0 +1,305 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.8.2 <0.9.0;
+contract Prtices{
+struct Transaction{
+    uint256 amount;
+    address sender;
+    address receiver;
+    uint256 timestamp;
+    string description;
+
+}
+
+mapping (address=>uint256)public balance;
+Transaction[] public transaction;
+address public owner;
+constructor(){
+    owner=msg.sender;
+}
+
+
+modifier onlyOnber(){
+    require(owner == msg.sender);
+    _;
+}
+
+function deposit()public payable {
+
+require(msg.value > 0 , "ammout must be greater then zero");
+balance[msg.sender]+=msg.value;
+}
+
+function withdraw(uint256 amount)public{
+    require(amount >0);
+    require(amount<= balance[msg.sender] , "insufficient balance");
+    balance[msg.sender]-=amount;
+    payable(msg.sender).transfer(amount);
+}
+
+function addTransaction(address receiver , uint256 amount , string memory description )public {
+
+require(amount > 0 , "Amount must be greater tthan zero");
+require(balance[msg.sender] >=amount , "Insfficient balnce");
+
+balance[msg.sender]-=amount;
+balance[receiver]+=amount;
+transaction.push(Transaction(amount  , msg.sender ,receiver , block.timestamp ,description ));
+}
+
+function getTransaction()public view returns(uint256){
+
+    return transaction.length;
+}
+
+function getTransactionByid(uint id)public view returns(uint256 , address , address , uint256 , string memory){
+require(id < transaction.length , "invalid tranaction id");
+Transaction memory transactions=transaction[id];
+return (transactions.amount ,transactions.sender , transactions.receiver , transactions.timestamp , transactions.description );
+}
+}
+
+
+contract StockTrading{
+//stock Trading DEFI
+
+struct Stock{
+    uint256 price;
+    uint256 quantity;
+}
+
+mapping (string => Stock)public stocks;
+mapping (address =>mapping (string =>uint256))public balance;
+
+address public hedgeFund;
+
+constructor (){
+    hedgeFund=msg.sender;
+}
+
+modifier OnlyHedgeFund(){
+
+    require(msg.sender ==hedgeFund , "only the hedge funcd can call this func");
+    _;
+}
+
+function buyStock(string  memory stockName , uint256 quantity)public payable {
+Stock memory stockss=stocks[stockName];
+require(stockss.price >0 , "stock does not exist");
+require(msg.value>=stockss.price*quantity , "insufficient funds ");
+balance[msg.sender][stockName]+=quantity;
+}
+
+
+function sellStock(string memory stockName , uint256 quantity)public{
+
+    Stock memory stockss=stocks[stockName];
+    require(stockss.price >0 , "stock does not exist");
+    require(balance[msg.sender][stockName]>=quantity , "insufficient stock  balance");
+balance[msg.sender][stockName]-=quantity;
+payable (msg.sender).transfer(stockss.price*quantity);
+}
+
+function addStock(string memory stockName , uint256 price, uint256 quantity)public OnlyHedgeFund{
+    Stock memory stockss=stocks[stockName];
+    require(stockss.price==0, "stock already exist");
+    stocks[stockName]=Stock(price , quantity);
+}
+
+function updateStockePrices(string memory StockName , uint256 price)public OnlyHedgeFund{
+    Stock memory stockss=stocks[StockName];
+    require(stockss.price >0, "stock doest not exist");
+    stocks[StockName].price=price;
+}
+}
+
+
+////////Smart Event organization ///////////
+
+//SPDX-License-Identifier: Unlicense
+pragma solidity >=0.5.0 <0.9.0;
+
+
+contract EventContract {
+ struct Event{
+   address organizer;
+   string name;
+   uint date; //0 1 2
+   uint price;
+   uint ticketCount;  //1 sec  0.5 sec
+   uint ticketRemain;
+ }
+
+
+ mapping(uint=>Event) public events;
+ mapping(address=>mapping(uint=>uint)) public tickets;
+ uint public nextId;
+ 
+
+
+ function createEvent(string memory name,uint date,uint price,uint ticketCount) external{
+   require(date>block.timestamp,"You can organize event for future date");
+   require(ticketCount>0,"You can organize event only if you create more than 0 tickets");
+
+
+   events[nextId] = Event(msg.sender,name,date,price,ticketCount,ticketCount);
+   nextId++;
+ }
+
+
+ function buyTicket(uint id,uint quantity) external payable{
+   require(events[id].date!=0,"Event does not exist");
+   require(events[id].date>block.timestamp,"Event has already occured");
+   Event storage _event = events[id];
+   require(msg.value==(_event.price*quantity),"Ethere is not enough");
+   require(_event.ticketRemain>=quantity,"Not enough tickets");
+   _event.ticketRemain-=quantity;
+   tickets[msg.sender][id]+=quantity;
+
+
+ }
+
+
+ function transferTicket(uint id,uint quantity,address to) external{
+   require(events[id].date!=0,"Event does not exist");
+   require(events[id].date>block.timestamp,"Event has already occured");
+   require(tickets[msg.sender][id]>=quantity,"You do not have enough tickets");
+   tickets[msg.sender][id]-=quantity;
+   tickets[to][id]+=quantity;
+ }
+}
+
+///////
+
+
+// pragma solidity >=0.8.2 <0.9.0;
+
+// contract Animation {
+//     uint public one = 10;
+//     bool public paused;
+
+//     function mult(uint ones) public {
+//         require(!paused, "Animation is paused");
+//         one = ones * 2;
+//     }
+
+//     function plue(uint all) public {
+//         require(!paused, "Animation is paused");
+//         one = all + 10;
+//     }
+
+//     function pause() public {
+//         paused = true;
+//     }
+
+//     function play() public {
+//         paused = false;
+//     }
+// }
+
+
+
+
+
+
+// contract Practies {
+//     enum Number { one, two, three }
+//     Number public number;
+
+//     function one() public pure returns (Number) {
+//         return Number.one;
+//     }
+
+//     function two() public pure returns (Number) {
+//         return Number.two;
+//     }
+
+//     function three() public pure returns (Number) {
+//         return Number.three;
+//     }
+
+//     function sortNumber(Number _num) public {
+//         number = _num;
+//     }
+
+//     function checkNumber() public view returns (Number) {
+//         return number;
+//     }
+
+//     function compareNumber(Number _num1, Number _num2) public pure returns (bool) {
+//         return uint8(_num1) > uint8(_num2);
+//     }
+
+//     function addNumbers(Number _num1, Number _num2) public pure returns (Number) {
+//         uint8 sum = uint8(_num1) + uint8(_num2);
+//         require(sum <= 3, "Sum exceeds the maximum value");
+//         return Number(sum);
+//     }
+// }
+
+
+// contract Test{
+
+// enum Size{small , medium , large}
+
+
+// Size public choies=Size.small;
+
+
+// function setSmall()public {
+
+//     choies=Size.small;
+// }
+
+// function setLarge()public{
+//         choies=Size.large;
+// }
+
+// function setMedium()public{
+//         choies=Size.medium;
+// }
+
+// }
+
+
+
+// contract State{
+
+//     enum User{allowed , allowed_not , wait}
+
+// User public user=User.allowed;
+
+// uint public lottery=1000;
+
+// function oner()public{
+//     if(user== User.allowed){
+// lottery=0;
+
+//     }
+// }
+
+// function changowner()public{
+//     user=User.allowed_not;
+// }
+
+// }
+
+
+
+// contract EnumContract {
+//     enum Status { Active, Inactive, Pending }
+
+//     Status public currentStatus;
+
+//     constructor() {
+//         currentStatus = Status.Active;
+//     }
+
+//     function updateStatus(Status _newStatus) public {
+//         currentStatus = _newStatus;
+//     }
+
+//     function getStatus() public view returns (Status) {
+//         return currentStatus;
+//     }
+// }

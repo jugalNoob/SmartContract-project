@@ -1,0 +1,206 @@
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
+
+contract MralelTree {
+    struct Tree {
+        string name;
+        uint age;
+        string country;
+        string gender;
+        address owner;
+    }
+
+    uint private  timePeriod;
+
+    constructor(uint _timeperiod) {
+        timePeriod = block.timestamp + _timeperiod;
+    }
+
+    bool public isPaused;
+
+    mapping(address => Tree[]) private userTrees;
+    uint public number;
+
+
+uint public ethermoney=1000 wei;
+
+function  AddInformation(uint _price, string memory _name , uint _age , string memory _country , string memory _gender) public payable  {
+        require(!isPaused, "Contract is paused");
+        require(timePeriod > block.timestamp, "Cannot add information during time change");
+
+   payable (msg.sender).transfer(_price);
+        Tree memory newTree = Tree( _name , _age , _country , _gender , msg.sender);
+        userTrees[msg.sender].push(newTree);
+         ethermoney -= _price;
+        number++;
+    }
+
+
+function DeleteUserInformation(address ticks)public payable {
+Tree[] memory pushi=userTrees[ticks];
+payable(pushi[0].owner).transfer(10 wei);
+ ethermoney+= 10 wei;
+     delete userTrees[ticks];
+}
+
+
+function addmoney(uint _value)public payable {
+    ethermoney+=_value;
+}
+
+
+function withdraw(uint _value)public payable {
+        ethermoney-=_value;
+}
+
+
+/////---Update Struct Information -----//////////////
+
+
+    function updateTreeInfo(uint _index, string memory _name ,  uint _age, string memory _country , string memory _gender) public {
+        require(!isPaused, "Contract is paused");
+        require(_index < userTrees[msg.sender].length, "Invalid index");
+        require(timePeriod < block.timestamp, "Cannot update information during time change");
+
+
+        userTrees[msg.sender][_index].name = _name;
+        userTrees[msg.sender][_index].age = _age;
+        userTrees[msg.sender][_index].country = _country;
+        userTrees[msg.sender][_index].gender = _gender;
+    }
+
+
+
+////////////////////
+    function getUserTrees() public view returns (Tree[] memory) {
+        return userTrees[msg.sender];
+    }
+
+address private  sned=msg.sender;
+
+
+modifier onlySend(){
+require(sned == msg.sender);
+_;
+}
+
+
+function play() public onlySend  {
+isPaused = false;
+}
+
+
+
+function pause() public onlySend {
+isPaused = true;
+}
+
+
+}
+
+
+function loop()public pure returns(uint){
+
+  uint count=0;
+
+  for(uint i=0; i<10; i++){
+
+    count=count+5; 
+
+  }
+
+  return count;
+}
+
+
+
+
+
+/////message sneder limit //////
+//  mapping(address => uint) public clickCounts;
+//     uint public limit = 3;
+
+//     function clicked() public {
+//         require(clickCounts[msg.sender] < limit, "Maximum click limit reached");
+
+//         clickCounts[msg.sender]++;
+//     }
+
+
+
+
+
+////////////////////////////////////// onlyClick 5 time
+uint public clickCount = 0;
+uint public limit = 3;
+uint public age1;
+uint public age2;
+uint public age3;
+string public name;
+
+function clicked() public {
+    if (clickCount < limit) {
+        clickCount++;
+        if (clickCount == 1) {
+            age1 = 23;
+        } else if (clickCount == 2) {
+            age2 = 698;
+        } else if (clickCount == 3) {
+            age3 = 102;
+        }
+    } else {
+        name = "kisdkks";
+        delete clickCount;
+        clickCount = 0; // Reset click count if limit exceeded
+        limit++; // Increase the limit by 1
+        delete  age1;
+        delete  age2;
+        delete  age3;
+    }
+}
+
+}
+
+contract Practiess{
+
+    bytes public one="jug"; // bits 10 
+}
+
+
+if(bytes(name).length > bytes(name).length){
+
+}
+
+    string memory man;
+    if(age > 18){
+
+        man="jugal sharma";
+    }else{
+
+        man="kanika";
+    }
+
+    return man;
+}
+
+
+
+
+
+
+Name	Returns
+blockhash(uint blockNumber) returns (bytes32)	Hash of the given block - only works for 256 most recent, excluding current, blocks
+block.coinbase (address payable)	Current block miner's address
+block.difficulty (uint)	Current block difficulty
+block.gaslimit (uint)	Current block gaslimit
+block.number (uint)	Current block number
+block.timestamp (uint)	Current block timestamp as seconds since unix epoch
+gasleft() returns (uint256)	Remaining gas
+msg.data (bytes calldata)	Complete calldata
+msg.sender (address payable)	Sender of the message (current caller)
+msg.sig (bytes4)	First four bytes of the calldata (function identifier)
+msg.value (uint)	Number of wei sent with the message
+now (uint)	Current block timestamp
+tx.gasprice (uint)	Gas price of the transaction
+tx.origin (address payable)	Sender of the transaction
+

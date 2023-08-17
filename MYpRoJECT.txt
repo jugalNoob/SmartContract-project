@@ -1,0 +1,21 @@
+1::CryptoGraphy  -1
+
+2::Event -1 
+
+3::AirPlan -1
+
+4::Image Upload --> socket io -1 
+
+5::ERC-20 8::Stacking - 1 -1 
+
+6::Crowd Funding -1 
+
+7::Metaverse NFT Mint -1
+
+8::NFT MarketPlace EC2721 -1
+
+9::RestApi -- > URL Short --> 11
+
+
+ 
+10::MappIng /// 
