@@ -26,3 +26,114 @@ contract MyContract {
     }
 }
 
+
+|||||||||||||||||||||||||||||||
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+// Create a library
+library MathLibrary {
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a + b;
+    }
+}
+
+// Create a contract that uses the library
+contract Calculator {
+    using MathLibrary for uint256;
+
+    function addNumbers(uint256 x, uint256 y) public pure returns (uint256) {
+        // Use the library function
+        return x.add(y);
+    }
+}
+
+||||||||||||||||||||||| Import Use Contract
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+library MathLibrary {
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a + b;
+    }
+}
+
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+library MathLibrary {
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a + b;
+    }
+}
+
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+library MathLibrary {
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a + b;
+    }
+}
+
+
+
+|||||||||||||||||||||||||||||
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+// Import the MathLibrary from Library.sol
+import "./Library.sol";
+
+contract Calculator {
+    using MathLibrary for uint256;
+
+    function addNumbers(uint256 x, uint256 y) public pure returns (uint256) {
+        // Use the library function
+        return x.add(y);
+    }
+}
+
+
+
+|||||||||||||||||||||// Define an abstract 
+
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+// Define an abstract contract
+abstract contract PaymentGateway {
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    // Declare an abstract function without an implementation
+    function pay(uint256 amount) public virtual returns (bool);
+
+    // Define a concrete function that can be used by inheriting contracts
+    function isOwner() public view returns (bool) {
+        return msg.sender == owner;
+    }
+}
+
+// Create a contract that inherits from the abstract contract
+contract MyPaymentGateway is PaymentGateway {
+    // Implement the abstract function
+    function pay(uint256 amount) public override returns (bool) {
+        // In a real implementation, this function would perform the payment logic
+        // For simplicity, we just return true here
+        return true;
+    }
+}
+
+
