@@ -185,6 +185,54 @@ if(bytes(name).length > bytes(name).length){
 
 
 
+uint public blockNumber = block.number;
+    uint public gaslimit = block.gaslimit;
+    uint public chainId = block.chainid;
+    uint public difficulty = block.difficulty; // Renamed from difficultys
+    address public coinbase = block.coinbase;
+
+    uint public prices=tx.gasprice;
+
+
+
+function getBlockHashs(uint _blockNumber) public view returns (bytes32) {
+    require(_blockNumber <= block.number, "Block number must be within range");
+    return blockhash(_blockNumber);
+  
+}
+
+
+    function updateTreeInfo(uint _index, string memory _name ,  uint _age, string memory _country , string memory _gender) public {
+        require(!isPaused, "Contract is paused");
+        require(_index < userTrees[msg.sender].length, "Invalid index");
+        require(timePeriod < block.timestamp, "Cannot update information during time change");
+
+
+        userTrees[msg.sender][_index].name = _name;
+        userTrees[msg.sender][_index].age = _age;
+        userTrees[msg.sender][_index].country = _country;
+        userTrees[msg.sender][_index].gender = _gender;
+
+          ethermoney -= 100 wei;
+    }
+
+
+
+    function Ins(uint value) public {
+        if (value > 9 && value < 19) {
+            inscurce = "car";
+        } else if (value > 20 && value < 29) {
+            inscurce = "bus";
+        } else if (value > 30 && value < 39) {
+            inscurce = "train";
+        } else if (value > 40 && value < 50) {
+            inscurce = "bike";
+        } else {
+            inscurce = "";
+        }
+    }
+
+
 
 
 
