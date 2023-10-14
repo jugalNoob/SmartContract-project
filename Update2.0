@@ -1,0 +1,113 @@
+1:::Abstract Contracts simple exmaple
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+// Inheriting from the abstract contract
+contract Dog is Animal {
+    string public breed;
+
+    constructor(string memory _name, uint _age, string memory _breed) Animal(_name, _age) {
+        breed = _breed;
+    }
+
+    function makeSound() public view override returns (string memory) {
+        return "Woof!";
+    }
+}
+
+||||||||||||||||Update Code For ||||||||||||
+
+//     bool public isCheckNameReset;
+
+//     function resetCheckName() public {
+//         isCheckNameReset = false;
+//         one = block.timestamp + 5;
+//         two = block.timestamp + 10;
+//     }
+// 
+    //  struct NameAndMoney {
+    //     string name;
+    //     uint256 money;
+    // }
+
+    //   function checkName() public view returns (NameAndMoney memory) {
+    //     NameAndMoney memory result;
+        
+    //     if (one > block.timestamp) {
+    //         result.money = money - 10 wei;
+    //          result.name = "";
+    //     } else if (two < block.timestamp) {
+    //         result.money = money + 10 wei;
+    //          result.name = "";
+    //     } else {
+    //         result.money = money;
+    //          result.name = name;
+    //     }
+    //     return result;
+    // }
+
+
+||||||||||||||||||||||||GetRanDom NumBer SmartContract||||||||||||||||||
+
+contract RandomNumberGenerator {
+    address public owner;
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function generateRandomNumber(uint256 maxValue) public view returns (uint256) {
+        require(maxValue > 0, "maxValue must be greater than 0");
+        uint256 randomSeed = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender, block.difficulty)));
+        uint256 randomNumber = randomSeed % maxValue;
+        return randomNumber;
+    }
+}
+
+
+|||||||||||||||||||||||||||||||||Create a HashIn ||||||||||||||||||||||||
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract HashGenerator {
+    function generateHash(string memory data) public pure returns (bytes32) {
+        bytes32 hash = sha256(abi.encodePacked(data));
+        return hash;
+    }
+
+ function generateHash(string memory data) public pure returns (bytes32) {
+        bytes32 hash = sha256(abi.encodePack(data));
+        return hash;
+    }
+}
+
+
+||||||||||||||||||||||||||Change Your Address With Modifyer
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract HashGenerator {
+    address public one=msg.sender ;
+    uint private two ;
+
+
+    modifier vilad() {
+        require(one == msg.sender, "You are not authorized.");
+        _;
+    }
+
+    function check() public view vilad returns (uint) {
+        return two;
+    }
+
+    function setTwo(uint _newValue) public vilad {
+        two = _newValue;
+    }
+      
+  function ChangeAddress(address _add)public  {
+require(one==msg.sender , "You are not authorized");
+one=_add;
+  }
+}
+
