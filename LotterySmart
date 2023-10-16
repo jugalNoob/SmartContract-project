@@ -1,0 +1,60 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+
+pragma solidity ^0.8.0;
+
+contract HelloWorlds {
+    address[] private addresses;  // Change to dynamic array
+    address Admin;
+    uint private one;
+    bool private addressShown = false; // Add the addressShown state variable
+
+    constructor() {
+        Admin = msg.sender;
+        one = block.timestamp + 10;
+    }
+
+    function getAllAddresses() public view returns (address[] memory) {
+        require(one < block.timestamp, "Please wait until all addresses are added.");
+        return addresses;
+    }
+
+    function getRandomAddress() public  view returns (address) {
+        require(addresses.length > 0, "No addresses in the array.");
+        uint256 randomIndex = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender))) % addresses.length;
+        return addresses[randomIndex];
+    }
+
+
+
+function getAllAddressesUser() public view returns (address, string memory) {
+    string memory stringes = "Only one random address can be shown.";
+    string memory win = "this address is the winner";
+    address randomAddress = getRandomAddress();
+    string memory resultString;
+    if (addresses.length < 1) {
+           randomAddress = address(0); // Set randomAddress to the zero address
+        resultString = stringes;
+    } else {
+      resultString = win;
+    }
+    return (randomAddress, resultString);
+}
+
+
+    function isAddressInArray(address _checkAddress) private view returns (bool) {
+        for (uint256 i = 0; i < addresses.length; i++) {
+            if (addresses[i] == _checkAddress) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function addAddress(address _newAddress) public {
+        require(addresses.length < 2, "Only up to four addresses can be added.");
+        require(!isAddressInArray(_newAddress), "Address is already in the array.");
+        addresses.push(_newAddress);
+    }
+}
