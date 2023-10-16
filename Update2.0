@@ -111,3 +111,57 @@ one=_add;
   }
 }
 
+|||||||||||||||||||||Random Address Smart Contact||||||||||||||||
+
+pragma solidity ^0.8.0;
+
+contract HelloWorlds {
+
+    address[] private addresses;  // Change to dynamic array
+
+   
+    address Admin;
+
+
+
+ function getAllAddresses() public view returns (address[] memory) {
+  require(one < block.timestamp , " wait enter all addres and then show your address");
+return   addresses; 
+
+ }
+
+
+function getRandomAddress() public view returns (address) {
+    require(addresses.length > 0, "No addresses in the array.");
+    uint256 randomIndex = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender))) % addresses.length;
+    return addresses[randomIndex];
+}
+
+
+    function isAddressInArray(address _checkAddress) private view returns (bool) {
+        for (uint256 i = 0; i < addresses.length; i++) {
+            if (addresses[i] == _checkAddress) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    uint public one=block.timestamp+10;
+       modifier onlyAdmin{
+        require(msg.sender == Admin, "only Atc can run this function");
+        _;
+    }
+
+    function addAddress(address _newAddress) public  {
+        require(addresses.length < 4, "Only two addresses can be added.");
+        require(!isAddressInArray(_newAddress), "Address is already in the array.");
+// require(p > block.timestamp , " your  Time  is close  "); //Your Time Is up
+    
+        addresses.push(_newAddress);
+    }
+
+
+}
+
+
