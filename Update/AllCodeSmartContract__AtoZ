@@ -1,1 +1,98 @@
+||||||||||||||Array ||||||||||||||||||||||||||
+
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
+contract Practies {
+    string[] public one = ["jugal", "sharma", "karam"];
+
+    function Pushing(string memory newElement) public {
+        one.push(newElement);
+    }
+
+    function CheckLength() public view returns (uint) {
+        return one.length;
+    }
+
+    function popes() public {
+        one.pop();
+    }
+
+    function LoopingArray() public view returns (string[] memory) {
+        string[] memory newArray = new string[](one.length);
+        for (uint i = 0; i < one.length; i++) {
+            newArray[i] = one[i];
+        }
+        return newArray;
+    }
+}
+
+
+||||||||||||||Bytes |"|||||||||||||||||||||||||||||||||||||
+
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
+
+contract Practice {
+ 
+ bytes public  one="jugal";
+
+function pushinh()public {
+    one.push("c");
+}
+ function getLength() public view returns (uint) {
+        return one.length;
+    }
+
+function Poping()public{
+    one.pop();
+}
+}
+
+||||||||||||||||||||||Struct Your Code 
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
+
+contract Practice {
+    struct MyStruct {
+        uint number;
+        string name;
+        address addr;
+    }
+
+    MyStruct public myData;
+
+    function setMyStruct(uint _number, string memory _name) public {
+        myData = MyStruct(_number, _name, msg.sender);
+       
+    }
+
+    function Updating(uint _num , string memory _nam)public{
+        myData.number=_num;
+        myData.name=_nam;
+    }
+    
+}
+
+
+||||||||||||||||||||||||||||||Mapping Styem::::::::::::::::::::::::
+
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
+
+contract Practice {
+    struct MyStruct {
+        uint number;
+        string name;
+        address addr;
+    }
+
+    mapping(address => MyStruct) public Map;
+    function Mappinges(uint _num, string memory _name) public {
+        MyStruct memory newStruct = MyStruct(_num, _name, msg.sender);
+        Map[msg.sender] = newStruct;
+    }
+}
+
+
+|||||||||||||||||||||||||||||
 
