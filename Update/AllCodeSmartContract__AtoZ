@@ -1,3 +1,49 @@
+||||||||||||||||||||||||||||||||||||  Global Variable in solidity 
+   address public owner;
+    uint public contractCreationTime;
+    
+    constructor() {
+        owner = msg.sender;
+        contractCreationTime = block.timestamp;
+    }
+
+    function getSender() public view returns (address) {
+        return msg.sender;
+    }
+
+    function getMessageValue() public payable {
+        // Do something with the value sent with the transaction
+    }
+
+    function getCurrentBlockNumber() public view returns (uint) {
+        return block.number;
+    }
+
+    function getContractBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+
+    function getCurrentTimestamp() public view returns (uint) {
+        return block.timestamp;
+    }
+
+
+|||||||||||||||||||| View or Pure \\\\\||||||||||||||||||||||||||||||||||||||
+ uint public one=69;
+
+ function vi()public view  returns(uint){
+    return  one;
+ }
+
+  function purez()public pure  returns(uint){
+    uint io=56;
+    return  io;
+ }
+
+
+
+
+
 ||||||||||||||Array ||||||||||||||||||||||||||
 
 // SPDX-License-Identifier: MIT
@@ -94,5 +140,85 @@ contract Practice {
 }
 
 
-|||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||| TimeStamp ???????????????????
+
+uint public one=block.timestamp+10;
+function onees()public view  returns(uint){
+    require(one < block.timestamp , "time not show"); //after 10 min check your result    
+    require(one < block.timestamp , "time not show"); //before 10 min check your result
+}
+}
+
+|||||||||||||||||||||||| Create a wallet Ethereum ||||||||||||||||||||
+
+contract Practice {
+    receive() external payable {
+        // This function allows the contract to receive Ether
+    }
+    function checkBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+    function transfer(address owner , uint value )public payable  {
+      
+    (bool sent, ) = owner.call{value: value}("");
+    require(sent, "Transfer failed");
+    }
+}
+
+
+|||||||||||||| Smart contract Hashing    ////////////////////////////////////////////////////////////////////
+
+  function hashKeccak256(uint _x, string memory name, address _add) public pure returns(bytes32) {
+        return keccak256(abi.encodePacked(_x, name, _add));
+    }
+
+    function hashSha256(uint _x, string memory name, address _add) public pure returns(bytes32) {
+        return sha256(abi.encodePacked(_x, name, _add));
+    }
+
+    function hashRipemd160(uint _x, string memory name, address _add) public pure returns(bytes32) {
+        return ripemd160(abi.encodePacked(_x, name, _add));
+
+
+
+|||||||||||||||||||||| Modifer |||||||||||||||||||||||||||||
+   uint public value;
+
+    modifier checkValue(uint newValue) {
+        require(newValue == 69, "Value must be 69");
+        _;
+    }
+
+    function setValue(uint newValue) public checkValue(newValue) {
+        value = newValue;
+    }
+       
+    }
+
+
+
+|||||||||||||||||||||||||||| contract  inheriting ///////////////////////
+pragma solidity ^0.8.0;
+contract HashFunctions {
+    uint public one = 69;
+
+    function Two() public view virtual returns (uint) {
+        return one;
+    }
+}
+contract Second is HashFunctions {
+    function Two() public view override returns (uint) {
+        return one;
+    }
+}
+
+
+||||||||||||||||||| String validtion ///////////////////
+
+function Strings(string memory name)public pure  returns(string memory){
+
+require(bytes(name).length > 5);
+
+return  name;
+    }
 
