@@ -222,3 +222,32 @@ require(bytes(name).length > 5);
 return  name;
     }
 
+
+
+||||||||||||||||||||||||  Struct and Mapping ------------------------
+
+pragma solidity ^0.8.0;
+
+contract HashFunctions {
+
+
+struct Ones{
+    string name;
+    uint age;
+}
+
+mapping (address => Ones[])private Info;
+
+
+function Information(string memory _name , uint _age)public{
+Ones memory all=Ones(_name , _age);
+Info[msg.sender].push(all);
+}
+
+function GetInfo()public view returns(Ones[] memory ){
+
+    return  Info[msg.sender];
+}
+}
+
+
