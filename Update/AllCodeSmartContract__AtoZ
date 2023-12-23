@@ -251,3 +251,92 @@ function GetInfo()public view returns(Ones[] memory ){
 }
 
 
+|||||||||||||||||||||||| Data Loaction  -- > Storage  , Memory  , CallDate /////////////////////////////////
+
+contract HashFunctions {
+/// Storage Data  
+
+// --> Memory Ram 
+
+// --> callData Ram and use in Function  input
+
+ uint[] public arr=[1 , 2 , 3 , 4];
+
+ function store()public {
+
+ uint[] storage arr1=arr;
+
+// arr1[3]=99;
+
+ }
+
+// function memorys() public  view {
+// uint[] memory arr2=arr;
+
+// arr2[1]=192;
+// }
+
+//CallData ----------------------------------------------------->>>
+
+function   Meory(string memory str ,  uint[] memory arr)public{  
+}
+
+//
+function  CallData(string calldata str ,  uint[] calldata arr)public{  //never change value
+}
+}
+
+
+
+?????????????????????????????????? -------------------------------> Events  ----------------------------
+uint public  constant one=451;
+
+uint public two=7545;
+
+
+
+/// Storge in trx logs 
+
+contract HashFunctions {
+
+event balance(address indexed  acc , string mess , uint age);
+
+function Mess(address _acc , string memory _mess ,  uint _age)public{
+
+emit balance  (_acc , _mess , _age );
+}
+
+}
+
+
+//////////////////////////////////// ------------------------------>  Improts Smart Contract 
+
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7.0 <0.9.0;
+
+
+
+contract Practices {
+    uint public one = 12345;
+
+    string  public two="jugal sharma";
+}
+
+
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7.0 <0.9.0;
+
+
+
+contract Practices {
+    uint public one = 12345;
+
+    string  public two="jugal sharma";
+}
+
+
+
+
+
