@@ -190,3 +190,108 @@ const Information=async()=>{
 export default Pay;
 
 
+|||||||||||||||||| Readmon  ||||||||||||| --------------------------------------------------------->>>>>>>>>>>>>>>>>>>>
+
+import React, { useState, useEffect } from 'react';
+import { ethers } from 'ethers';
+import abi from './ABI.json';
+function App() {
+  const [state, setState] = useState({
+    provider: null,
+    signer: null,
+    address: null,
+    balance: null, // Add balance state
+  });
+  const contractAddress = '0x3B1170DA79e66B7015946aA26745F4fA943b3E58';
+
+
+
+  const {erorAc , setErrorAc}=useState(null)
+
+  useEffect(() => {
+    const Checker = async () => {
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const accounts = await provider.send('eth_requestAccounts', []);
+        if (!accounts || accounts.length === 0) {
+          // alert("Please connect your wallet");
+          console.log("Please connect your wallet");
+        } else {
+          const signer = provider.getSigner();
+          const address = await signer.getAddress();
+  
+          // Get the balance of the user's address
+          const balance = await provider.getBalance(address);
+  
+          setState({ provider, signer, address, balance });
+          // console.log('User accounts:', accounts);
+          // console.log('User balance:', ethers.utils.formatEther(balance));
+        }
+        // Convert Wei to Ether
+      } catch (error) {
+        if (error.code === -32002) {
+          // Handle the case where the user denies the account access request.
+          alert("Access to your wallet was denied.");
+        
+          // console.log("Access to your wallet was denied.");
+        } else {
+          console.error('Error fetching user account:', error);
+        }
+      }
+    };
+    Checker();
+  }, []);
+
+  
+  
+  
+  //Get Random In smartcontract 
+
+  const [rand , setRand]=useState()
+
+  const [loading, SetLoad]=useState()
+  const Reand=async()=>{
+
+    SetLoad(true)
+
+    const {provider}=state
+
+if(!provider){
+  alert("Please connect your wallet")
+}else{
+
+  const contract = new ethers.Contract(contractAddress, abi, provider);
+  const bal = await contract.generateRandomNumber();
+  setTimeout(()=>{
+
+    SetLoad(false)
+    alert('msg');
+    console.log(bal.toString())
+    setRand(bal.toString())
+  },2000)
+}
+  }
+  return (
+    <div>
+{loading ? (
+  <p>Loading...</p> // Display a loading indicator
+) : (
+  <>
+  <h1>random{rand }</h1>
+    
+  <button onClick={Reand}>Generate</button>
+  <br />
+  <br />
+   
+      </>
+)}
+{state.address && <p>User Address: {state.address}</p>}
+      <br />
+      Balance: {state.balance && ethers.utils.formatEther(state.balance)} ETH
+   
+    </div>
+  );
+}
+export default App;
+
+
