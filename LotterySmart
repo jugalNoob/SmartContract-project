@@ -58,3 +58,43 @@ function getAllAddressesUser() public view returns (address, string memory) {
         addresses.push(_newAddress);
     }
 }
+
+
+
+//// With Number 
+
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
+
+contract XXX {
+    address private owner;
+
+    modifier onlyOwner() {
+        require(owner == msg.sender, "Only owner can call this function");
+        _;
+    }
+
+    uint public randomNumber;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function generateRandomNumber(uint256 maxValue) public onlyOwner returns (uint256) {
+        require(maxValue > 0, "maxValue must be greater than 0");
+        require(maxValue < 10, "maxValue must be greater than 10");
+
+        uint256 randomSeed = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender, blockhash(block.number))));
+        randomNumber = randomSeed % maxValue;
+
+        return randomNumber;
+    }
+
+    function winner() public view returns (uint256) {
+        if (randomNumber == 5) {
+            revert("Winner: randomNumber is 5");
+        } else {
+            revert("Not a winner: randomNumber is not 5");
+        }
+    }
+}
