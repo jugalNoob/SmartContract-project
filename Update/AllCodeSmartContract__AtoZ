@@ -1,3 +1,113 @@
+
+||||||||||||||||||| --------------------- >>>>>>>>>>>>>>
+import-directive
+using-directive
+contract-definition
+interface-definition
+library-definition
+function-definition
+constant-variable-declaration
+struct-definition
+enum-definition
+user-defined-value-type-definition
+error-definition
+event-definition
+
+
+::::::::::::::::: ------------------ >>>>>>>>>>> 
+
+contract ExampleContract {
+    // Define an enum named 'Status' with three possible values: 'Pending', 'Approved', and 'Rejected'
+    enum Status {
+        Pending,
+        Approved,
+        Rejected
+    }
+
+    // Declare a state variable of type 'Status'
+    Status public status;
+
+    // Function to set the status
+    function setStatus(Status _status) public {
+        status = _status;
+    }
+
+    // Function to get the current status
+    function getStatus() public view returns (Status) {
+        return status;
+    }
+}
+
+
+
+
+::::::::::::::::: ------------ storage ---
+
+data-location
+memory
+storage
+calldata
+
+
+
+
+:::::::::::::::::::: ----------------Contract-related
+this (current contract’s type): the current contract, explicitly convertible to address or address payable
+
+super: a contract one level higher in the inheritance hierarchy
+
+selfdestruct(address payable recipient): send all funds to the given address and (only on EVMs before Cancun or when invoked
+within the transaction creating 
+the contract) destroy the contract.
+
+
+
+
+
+||||||||||||||||||||||||||||||  ----------------> Function Visibility Specifiers
+
+
+public: visible externally and internally (creates a getter function for storage/state variables)
+
+private: only visible in the current contract
+
+external: only visible externally (only for functions) - i.e. can only be message-called (via this.func)
+
+internal: onl
+
+
+
+
+
+|||||||||||||||||||||Modifiers  ------------->
+
+
+pure for functions: Disallows modification or access of state.
+
+view for functions: Disallows modification of state.
+
+payable for functions: Allows them to receive Ether together with a call.
+
+constant for state variables: Disallows assignment (except initialization), does not occupy storage slot.
+
+immutable for state variables: Allows assignment at construction time and is constant when deployed. Is stored in code.
+
+anonymous for events: Does not store event signature as topic.
+
+indexed for event parameters: Stores the parameter as topic.
+
+virtual for functions and modifiers: Allows the function’s or modifier’s behavior to be changed in derived contracts.
+
+override: States that this function, modifier or public state variable changes the behavior of a function or modifier in a base contract.
+
+
+
+
+
+
+
+
+
 ||||||||||||||||||||||||||||||||||||  Global Variable in solidity 
    address public owner;
     uint public contractCreationTime;
@@ -6,6 +116,46 @@
         owner = msg.sender;
         contractCreationTime = block.timestamp;
     }
+
+ 
+uint public one=tx.gasprice;      ///////gas price of the transaction
+
+address public two=tx.origin; ////////sender of the transaction (full call chain)
+
+  function getBlockHash(uint blockNumber) public view returns (bytes32) {  ////
+        return blockhash(blockNumber);
+    }
+
+
+block.coinbase (address payable): current block miner’s address  ///////////
+
+
+uint public io=block.chainid ;  ///////// 
+
+
+block.basefee (uint): current block’s base fee (EIP-3198 and EIP-1559)  ///
+
+block.blobbasefee (uint): current block’s blob base fee (EIP-7516 and EIP-4844) ///
+
+
+   bytes4 public one;
+    function someFunction() public {  ///data.sig
+        one = msg.sig;
+    }
+
+
+bytes public  one=msg.data; //current data
+
+   uint public gasLimit=block.number; // block.Number
+
+  uint public gasLimit;
+
+
+    function setGasLimit(uint _gasLimit) external {
+        gasLimit = _gasLimit;
+    }
+
+
 
     function getSender() public view returns (address) {
         return msg.sender;
@@ -98,6 +248,22 @@ function pushinh()public {
 function Poping()public{
     one.pop();
 }
+
+bytes public data="jugal";
+
+
+
+    function by(string memory c) public {
+        bytes memory converted = bytes(c);
+        for (uint i = 0; i < converted.length; i++) {
+            data.push(converted[i]);
+        }
+
+}
+
+
+
+
 }
 
 ||||||||||||||||||||||Struct Your Code 
@@ -152,6 +318,7 @@ uint public one=block.timestamp+10;
 function onees()public view  returns(uint){
     require(one < block.timestamp , "time not show"); //after 10 min check your result    
     require(one < block.timestamp , "time not show"); //before 10 min check your result
+
 }
 }
 
@@ -342,6 +509,105 @@ contract Practices {
     string  public two="jugal sharma";
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+These are the built-in functions available in the EVM Yul dialect:
+
+- `stop`
+- `add`
+- `sub`
+- `mul`
+- `div`
+- `sdiv`
+- `mod`
+- `smod`
+- `exp`
+- `not`
+- `lt`
+- `gt`
+- `slt`
+- `sgt`
+- `eq`
+- `iszero`
+- `and`
+- `or`
+- `xor`
+- `byte`
+- `shl`
+- `shr`
+- `sar`
+- `addmod`
+- `mulmod`
+- `signextend`
+- `keccak256`
+- `pop`
+- `mload`
+- `mstore`
+- `mstore8`
+- `sload`
+- `sstore`
+- `tload`
+- `tstore`
+- `msize`
+- `gas`
+- `address`
+- `balance`
+- `selfbalance`
+- `caller`
+- `callvalue`
+- `calldataload`
+- `calldatasize`
+- `calldatacopy`
+- `extcodesize`
+- `extcodecopy`
+- `returndatasize`
+- `returndatacopy`
+- `mcopy`
+- `extcodehash`
+- `create`
+- `create2`
+- `call`
+- `callcode`
+- `delegatecall`
+- `staticcall`
+- `return`
+- `revert`
+- `selfdestruct`
+- `invalid`
+- `log0`
+- `log1`
+- `log2`
+- `log3`
+- `log4`
+- `chainid`
+- `origin`
+- `gasprice`
+- `blockhash`
+- `blobhash`
+- `coinbase`
+- `timestamp`
+- `number`
+- `difficulty`
+- `prevrandao`
+- `gaslimit`
+- `basefee`
+- `blobbasefee`
+
+These functions cover a wide range of operations and interactions available in the EVM (Ethereum Virtual Machine).
+They are used for various purposes such as arithmetic operations, memory manipulation, storage access, gas management,
+contract interaction, logging, and accessing blockchain information.
 
 
 
