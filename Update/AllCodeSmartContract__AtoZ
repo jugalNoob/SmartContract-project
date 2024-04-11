@@ -73,6 +73,12 @@ contract Practies {
 }
 
 
+ function loopss() public view returns(uint[] memory) {
+        return ar;
+    }
+
+
+
 ||||||||||||||Bytes |"|||||||||||||||||||||||||||||||||||||
 
 // SPDX-License-Identifier: MIT
