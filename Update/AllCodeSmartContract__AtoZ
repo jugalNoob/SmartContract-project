@@ -14,6 +14,28 @@ error-definition
 event-definition
 
 
+
+:::::::::::::: 0---- >  Ternary opearoo
+
+contract allow{
+
+
+function XX(uint _x)public pure returns(string memory){
+
+string memory val;
+
+val=_x > 100 ? "true" : "false";
+
+return  val;
+
+}
+
+}
+
+
+
+
+
 ::::::::::::::::: ------------------ >>>>>>>>>>> 
 
 contract ExampleContract {
