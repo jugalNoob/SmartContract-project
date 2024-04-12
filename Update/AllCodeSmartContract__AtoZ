@@ -15,7 +15,7 @@ event-definition
 
 
 
-:::::::::::::: 0---- >  Ternary opearoo
+:::::::::::::: 0---- >  Ternary opearoo ---------------------------------------------------
 
 contract allow{
 
@@ -34,9 +34,40 @@ return  val;
 
 
 
+function XX(uint _x)public pure returns(string memory){
+
+if(_x > 100 ){
+
+    revert ("true");
+}else {
+
+    revert("false");
+}
 
 
-::::::::::::::::: ------------------ >>>>>>>>>>> 
+:::::::::::::::::::::::::::::  interfacees  function --------------------------  
+
+
+
+interface Base {
+    function get() external pure returns(uint);
+}   
+
+contract XXX is Base {
+    function get() public pure override returns(uint) {
+        return 2;
+    }
+}
+
+
+
+
+
+
+
+
+
+::::::::::::::::: ------------------ >>>>>>>>>>>  ENUM status
 
 contract ExampleContract {
     // Define an enum named 'Status' with three possible values: 'Pending', 'Approved', and 'Rejected'
