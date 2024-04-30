@@ -1,3 +1,72 @@
+Contract Payment Project :::::::::::::::::
+
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7.0 <0.9.0;
+contract PayXXX {
+    address public one = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
+    uint public pay = 1 ether;
+    function addPayment() public payable {
+        pay += msg.value; // Add the received payment to the 'pay' state variable
+    }
+
+
+    // function AddPayment(uint   onea) public  payable {
+    //     pay += onea; // Add the received payment to the 'pay' state variable
+    // }
+
+    function withdrawTransfer(uint amount) public {
+        require(amount <= pay, "Insufficient balance");
+        payable(msg.sender).transfer(amount); // Transfer the specified amount to the caller
+        pay -= amount; // Update the balance
+    }
+
+function withdrawTransferTwo(uint amount)public {
+}
+
+
+function checkBalance() public view returns (uint) {
+    return address(one).balance;
+}
+
+}
+
+
+
+contract  Names {
+// address payable public getter=payable (0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB);
+receive() external payable { }
+
+
+function checkBalance() public view returns (uint) {
+    return address(this).balance; //this check contract balance
+}
+
+
+function Send(address payable  getter)public payable {
+//  bool sent=getter.send(1000000000000000000);
+  bool sent=getter.send(1000000000000000000);
+ require(sent , "check Your Balance");
+} 
+
+
+
+function Tranfer(address payable  getter )public{
+    getter.transfer(1000000000000000000);
+}
+
+
+
+function Call(address getter)public payable { /// important
+
+ (bool sent ,) = getter.call{value: 1000000000000000000}("");
+    require(sent, "Failed to call external contract");
+
+}
+
+}
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 pragma solidity ^0.8.0;
 
