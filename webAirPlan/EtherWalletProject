@@ -1,0 +1,58 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7.0 <0.9.0;
+
+
+///// Ether wallet money transfer 
+
+contract Jugal{
+
+
+uint public fund=1000 wei;
+
+
+ address private  Admin=msg.sender;
+
+    modifier onlyAdmin{
+        // require(msg.sender != Admin, "use anthor account address"); 
+        require(msg.sender == Admin , "use your account address");
+        _;
+    }
+
+
+function AddMoney(uint pay)public onlyAdmin  payable {
+require(pay > 900 , "check your add money");
+    fund+=pay;
+}
+
+
+
+receive() external onlyAdmin payable {
+    require(fund > 900 , "check your add money ");
+        fund += msg.value;
+    }
+ 
+
+function WithdrawAnthorAccount(address getter , uint amount)public payable { /// important
+ (bool sent ,) = getter.call{value: amount}("");
+    require(sent, "Failed to call external contract");
+      fund -= amount; 
+}
+
+
+function withdrawYourOwnAccount(uint amount)public  payable {
+ (bool sent ,) = msg.sender.call{value: amount}("");
+    require(sent, "Failed to call external contract");
+      fund -= amount;
+}
+
+
+function AddressBalance()public view  returns(uint){
+      return address(msg.sender).balance;
+  }
+
+
+function ContractBalance()public view returns(uint){
+       return address(this).balance;
+}
+}
