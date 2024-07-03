@@ -32,7 +32,7 @@ uint immutable public  ju=10;
 string public  a = unicode"Hello 😃";
 
 
-:::::::::::::: 0---- >  Ternary opearoo ---------------------------------------------------
+:::::::::::::: 0---- >  Ternary opearoo with String If lese     ---------------------------------------------------
 
 contract allow{
 
@@ -47,6 +47,20 @@ return  val;
 
 }
 
+}
+
+
+contract Example {
+    function getString() public pure returns (string memory, string memory) {
+        string memory name = 'jugal';
+        string memory _name = 'jugal  sharma';
+        
+        if (bytes(name).length == bytes(_name).length) {
+            return (name, _name);
+        } else {
+            revert("Strings have different lengths");
+        }
+    }
 }
 
 
