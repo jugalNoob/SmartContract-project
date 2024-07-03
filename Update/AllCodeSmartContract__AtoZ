@@ -506,6 +506,29 @@ contract Practice {
        
     }
 
+ ///////Update Informa
+address private  one=msg.sender;
+
+uint public number=45;
+
+    modifier onlyOwner {
+        require(msg.sender == one, "Only owner can call this function change value");
+        _; // Continue executing the function
+    }
+
+       function changeOwnerUpdate(address newOwner) public onlyOwner {
+        one = newOwner;
+    }
+
+
+    function UpdateNumber(uint _two)public  onlyOwner{
+
+        number=_two;
+    }
+
+
+}
+
 
 
 |||||||||||||||||||||||||||| contract  inheriting ///////////////////////
