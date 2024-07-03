@@ -14,6 +14,23 @@ error-definition
 event-definition
 
 
+Address -->><>><><>
+address payable x = payable(0x123);
+address myAddress = address(this);
+
+if (x.balance < 10 && myAddress.balance >= 10) x.transfer(10);
+
+address(nameReg).call{value: 1 ether}(abi.encodeWithSignature("register(string)", "MyName"));
+
+
+Types of solidity ---------<><><><>
+
+uint immutable public initialSupply=45;
+
+uint immutable public  ju=10;
+
+string public  a = unicode"Hello 😃";
+
 
 :::::::::::::: 0---- >  Ternary opearoo ---------------------------------------------------
 
@@ -62,7 +79,11 @@ contract XXX is Base {
 
 
 
+1::pure functions can be converted to 2::view and 3::non-payable functions
 
+4::view functions can be converted to non-payable functions
+
+5::payable functions can be converted to non-payable functions
 
 
 
@@ -248,6 +269,25 @@ bytes public  one=msg.data; //current data
 
 
 ||||||||||||||Array ||||||||||||||||||||||||||
+
+
+length:
+
+Dynamic storage arrays and bytes (not string) have a member function called push() that you can 
+use to append a zero-initialised element at the end of
+the array. It returns a reference to the element, so that it can be used like x.push().t = 2 or x.push() = b.
+pop():
+
+
+contract C {
+    bytes x = "012345678901234567890123456789";
+
+    function test() external returns(uint) {
+        (x.push(), x.push()) = (0x01, 0x02);
+        return x.length;
+    }
+}
+
 
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0 <0.9.0;
