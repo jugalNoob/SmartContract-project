@@ -412,6 +412,44 @@ contract Practice {
 }
 
 
+
+    struct Map{string name;  uint age;  address ad;}
+
+    mapping (address => Map[]) private   Mapp;
+
+    function Mapping(string memory _name , uint _age ,  address _ad)public {
+        Map memory map=Map(_name , _age , _ad);
+
+        Mapp[msg.sender].push(map);
+    }
+
+
+//Withourt use Indexing  update all Mapp
+function updateName(string memory _name) public {
+        uint length = Mapp[msg.sender].length;
+        for (uint i = 0; i < length; i++) {
+            Mapp[msg.sender][i].name = _name;
+        }
+
+}
+
+/// with use indexing Update only index value
+
+    function updateName(uint index, string memory _name) public {
+        require(index < Mapp[msg.sender].length, "Index out of bounds");
+        Mapp[msg.sender][index].name = _name;
+    }
+
+
+    
+
+
+function getMapps()public view  returns(Map[] memory ){
+    return  Mapp[msg.sender];
+}
+
+
+
 ||||||||||||||||||||||||||||| TimeStamp ???????????????????
 
 uint public one=block.timestamp+10;
