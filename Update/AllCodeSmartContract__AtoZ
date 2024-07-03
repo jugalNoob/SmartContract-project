@@ -266,6 +266,13 @@ bytes public  one=msg.data; //current data
 
 
 
+uint public one=45;
+
+    function concatenateString(uint _two) public  {
+     
+one=_two;
+    }
+
 
 
 ||||||||||||||Array ||||||||||||||||||||||||||
