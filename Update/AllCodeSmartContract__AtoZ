@@ -14,6 +14,31 @@ error-definition
 event-definition
 
 
+------------->>> 
+
+  // increment and decrement ----
+
+
+    // Function to increment `one` by 45 each time it's called
+    function push() public returns (uint) {
+        one += 45;  // Increment the value of `one` by 45
+        return one; // Return the updated value of `one`
+    }
+
+
+    function pop() public returns(uint){
+
+        one -=45;
+
+        return one ;  // Return the updated value of `one`
+    }
+
+}
+
+----------------------------------------------------------------------
+
+
+
 Address -->><>><><>
 address payable x = payable(0x123);
 address myAddress = address(this);
