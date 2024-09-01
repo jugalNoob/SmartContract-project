@@ -1,3 +1,18 @@
+------------------->>>>>>>>>
+1:https://cloud.google.com/application/web3/faucet/ethereum/holesky  --> free eth 
+
+2:: --> https://chainlist.org/
+
+3::https://medium.com/stakingbits/how-to-connect-polygon-mumbai-testnet-to-metamask-fc3487a3871f
+
+
+
+
+
+
+---------------------------->>>>>>>>>>>>>
+
+
 . Smart Contract Auditing and Security
 
 ...ConsenSys Diligence: Provides smart contract auditing services and tools for improving smart contract security.
