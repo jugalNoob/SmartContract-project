@@ -368,6 +368,29 @@ contract Practies {
 
 
 
+
+ 
+
+// uint[5]  public one=[1 , 2 , 3 ,  4 , 5  ];
+
+    uint[] public one = [1, 2, 3, 4, 5, 6, 7, 9];
+
+    // Function to loop through the array and return a new array
+    function getArray() public view returns (uint[] memory) {
+        uint[] memory newArray = new uint[](one.length);
+        for (uint i = 0; i < one.length; i++) {
+            newArray[i] = one[i];
+        }
+        return newArray;
+    }
+
+
+
+
+
+
+
+
 ||||||||||||||Bytes |"|||||||||||||||||||||||||||||||||||||
 
 // SPDX-License-Identifier: MIT
