@@ -1,3 +1,50 @@
+Optimizing Smart contract  
+
+
+Q Transaction  Fee and save Your gas fee?
+
+::-->1 Factors affecting gas consumption 
+
+..Opcode
+..State change 
+..Transaction 
+..Memory 
+
+
+
+::-> Transaction fee calculation ?
+
+Ans:  Transaction Fee=(Gas Consumed * Gas Price) * (Ether Price / 10^9)
+
+Note -> 1 ether = 10^9 wei 
+
+https://sepolia.etherscan.io/tx/0xdcb3f3909c28914b3aded9b04f6290bf4ff09e4d25e4061fa05dbaa1e92b0104
+
+Gas Price:  18.796262962 Gwei (0.000000018796262962 ETH)
+
+Gas Limit & Usage by Txn:  26,750 | 26,407 (98.72%)
+
+26407   ×   18.796262962 = 496,352.916037534 
+
+
+..use ether price with multi 2507
+
+496,352.916037534  * 2507  =1244356760.506098
+
+
+..use google search =(1244356760.506098)/10^9
+
+(1244356760.506098)/10^9  = 1.24435676051 
+
+
+
+
+
+
+
+
+
+
 1::CryptoGraphy  -1
 
 2::Event -1 
