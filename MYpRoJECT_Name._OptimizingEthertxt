@@ -41,7 +41,19 @@ Gas Limit & Usage by Txn:  26,750 | 26,407 (98.72%)
 2:: ----> Different smart contract ?
 
 
-26,750 | 26,407 (98.72%)  is minimum  21000  value add 
+.. Gas Limit & Usage by Txn: 26,750 | 26,407 (98.72%)  is minimum gas  limit  --> 21000
+
+
+
+
+3:: --> Ethereum Block Limit Explain  ?
+
+Bitcoin block Size =1Mb
+
+Ether block size = 30 million gas
+
+
+
 
 
 
