@@ -197,3 +197,80 @@ function UnStacking(uint _value  , uint ticketNumber ) public payable  {
  
 }
 
+
+
+//////////// Simple ERC-20 Token ------------------
+
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.7.0 <0.9.0;
+
+
+
+
+
+contract ERC20Simple{
+string private name;
+string private symbol;
+uint private decimal;
+uint private totalSupply;
+
+
+mapping (address=>uint) public balances;
+
+
+
+constructor (){
+    name="jugal";
+    symbol="jk";
+    decimal=18;
+    totalSupply=10000;
+    balances[msg.sender]=totalSupply;
+    // totalSupply=10000 * 10 ** decimal;
+}
+
+
+function checkName()public view returns(string memory){
+return  name;
+}
+
+
+function CheckSymbol()public view returns(string memory) {
+    return  symbol;
+}
+
+
+function checkDec()public view returns(uint) {
+return  decimal;
+}
+
+
+function Transfer(address _from , address _to , uint value)public  {
+balances[_from]-=value;
+balances[_to]+=value;
+}
+
+
+function checkBalance()public view  returns(uint){
+    return  balances[msg.sender];
+}
+
+
+function totalsupply()public view returns(uint){
+
+return  totalSupply;
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
