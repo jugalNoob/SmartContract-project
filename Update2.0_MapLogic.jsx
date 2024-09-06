@@ -219,6 +219,19 @@ contract RandomNumberGenerator {
 }
 
 
+
+
+:::::::::::::::  check contract address ::::::::::::::::::::
+
+
+  // Function to return the contract's address
+    function getContractAddress() public view returns (address) {
+        return address(this);
+    }
+
+
+
+
 |||||||||||||||||||||||||||||||||Create a HashIn ||||||||||||||||||||||||
 
 // SPDX-License-Identifier: MIT
