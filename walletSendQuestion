@@ -1,2 +1,45 @@
 
 
+
+
+
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+
+contract AllOne{
+
+// address payable public getter=payable(msg.sender);
+
+receive() external payable { }
+
+
+
+
+// you use your addres to get money back  first address ether
+function SEND(address payable one)public { // this ether show in msg.sender balance  and first add ether and transfer anther account
+  bool sent=one.send(1000000000000000000);
+  require(sent , "");
+
+
+
+}
+function Transfer(address payable  getter)public {
+getter.transfer(10000000000);
+}
+
+
+function CALL(address  payable  getter)public{
+    (bool sent , )=getter.call{value:10000000000}("");
+    require(sent , "trans is failed");
+}
+
+
+function checkbalabnce()public view returns(uint256){
+
+    return address(this).balance;
+}
+
+
+}
